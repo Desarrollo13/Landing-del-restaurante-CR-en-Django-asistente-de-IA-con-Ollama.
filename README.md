@@ -120,6 +120,10 @@ Se leen en `backend/restaurant/settings.py` y tienen valores por defecto para de
 | `OLLAMA_AUTH_PASS` | vacío | Contraseña si el túnel usa autenticación básica |
 | `SECURE_SSL_REDIRECT` | `True` con `DEBUG=False` | Redirección a HTTPS |
 | `SECURE_HSTS_SECONDS` | `31536000` con `DEBUG=False` | Duración de HSTS |
+| `ADMIN_USERNAME` | vacío | Usuario del superusuario creado por `crear_admin` |
+| `ADMIN_EMAIL` | vacío | Correo del superusuario |
+| `ADMIN_PASSWORD` | vacío | Contraseña del superusuario |
+| `CARGAR_DEMO` | `0` | `1` para cargar datos demo durante el build |
 
 Copia `.env.example` como `.env` si quieres configurar el desarrollo local. **No subas nunca el `.env` al repositorio.**
 
@@ -285,9 +289,13 @@ El repo incluye `requirements.txt`, `build.sh` y `render.yaml` (Blueprint).
 
 1. Sube el repo a GitHub.
 2. En Render: **New → Blueprint** y elige el repo.
-3. Rellena las variables marcadas con `sync: false`: `OLLAMA_URL`, `OLLAMA_AUTH_USER` y `OLLAMA_AUTH_PASS` con los datos de tu túnel.
-4. `build.sh` instala dependencias, ejecuta `collectstatic` y `migrate` en cada despliegue.
-5. Crea el superusuario desde la **Shell** del servicio: `python manage.py createsuperuser`.
+3. Rellena las variables marcadas con `sync: false`:
+   - `OLLAMA_URL`, `OLLAMA_AUTH_USER` y `OLLAMA_AUTH_PASS` con los datos de tu túnel.
+   - `ADMIN_USERNAME`, `ADMIN_EMAIL` y `ADMIN_PASSWORD` para el superusuario.
+4. `build.sh` instala dependencias, ejecuta `collectstatic`, `migrate` y crea el superusuario con `crear_admin` en cada despliegue (y carga datos demo si `CARGAR_DEMO=1`).
+5. Espera a que termine el deploy y entra en `https://TU-APP.onrender.com/admin/` con esas credenciales.
+
+> El plan gratuito de Render **no tiene Shell ni SSH** ni discos persistentes. Por eso el superusuario y los datos demo se crean desde `build.sh` vía variables de entorno. Si cambias `ADMIN_PASSWORD`, el próximo deploy actualiza la contraseña.
 
 Notas de producción:
 
@@ -295,6 +303,7 @@ Notas de producción:
 - Los estáticos se sirven con WhiteNoise; no hace falta un CDN.
 - El plan gratuito de PostgreSQL en Render **caduca a los 30 días**; exporta los datos o usa otro proveedor.
 - El disco de Render es efímero: las imágenes subidas al admin no se conservan entre despliegues. Para producción conviene usar URLs externas o almacenamiento de objetos (S3, Cloudinary, etc.).
+- El web service gratuito se duerme tras 15 minutos sin tráfico; la primera petición tarda ~1 minuto en despertarlo.
 
 ## Seguridad
 

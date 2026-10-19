@@ -28,6 +28,16 @@ services:
         sync: false
       - key: OLLAMA_AUTH_PASS
         sync: false
+      # Superusuario de Django (el plan free no tiene shell).
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Carga datos de demostración en cada deploy (idempotente). Pon "0" para desactivar.
+      - key: CARGAR_DEMO
+        value: "1"
 
 databases:
   - name: landing-cr-db
