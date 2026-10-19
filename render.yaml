@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: landing-cr
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn --chdir backend restaurant.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.5
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: WEB_CONCURRENCY
+        value: "2"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: landing-cr-db
+          property: connectionString
+      # Ollama se expone con un túnel (ngrok/cloudflared). Rellena estos valores
+      # en el panel de Render cada vez que reinicies el túnel.
+      - key: OLLAMA_URL
+        sync: false
+      - key: OLLAMA_MODEL
+        value: qwen2.5:3b
+      - key: OLLAMA_AUTH_USER
+        sync: false
+      - key: OLLAMA_AUTH_PASS
+        sync: false
+
+databases:
+  - name: landing-cr-db
+    plan: free
+    databaseName: landing_cr
+    user: landing_cr

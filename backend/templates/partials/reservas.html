@@ -1,0 +1,61 @@
+<section class="section section-dark" id="reserva">
+    <div class="container reservation-grid">
+        <div class="reservation-info" data-reveal>
+            <span class="section-label">Reservas</span>
+            <h2 class="section-title">Reserva tu mesa</h2>
+            <p>
+                Completa el formulario y nos pondremos en contacto para
+                confirmar tu reserva. También puedes llamarnos directamente.
+            </p>
+            <ul class="contact-list">
+                <li><span>Teléfono:</span> +34 600 123 456</li>
+                <li><span>Email:</span> hola@crrestaurante.com</li>
+                <li><span>Dirección:</span> Calle Mayor 12, Ciudad</li>
+            </ul>
+        </div>
+
+        <form class="reservation-form" id="reservationForm" novalidate data-reveal>
+            <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono (opcional)</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora</label>
+                    <input type="time" id="hora" name="hora">
+                </div>
+                <div class="form-group">
+                    <label for="comensales">Comensales</label>
+                    <select id="comensales" name="comensales" required>
+                        <option value="">Selecciona</option>
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5">5 o más</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje (opcional)</label>
+                <textarea id="mensaje" name="mensaje" rows="3" placeholder="Alguna petición especial..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enviar reserva</button>
+            <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+    </div>
+</section>

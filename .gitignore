@@ -1,0 +1,30 @@
+# Entorno virtual
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Django
+*.log
+staticfiles/
+
+# Base de datos (puede contener usuarios y datos reales)
+*.sqlite3
+db.sqlite3
+
+# Archivos subidos por usuarios (imágenes del admin)
+media/
+
+# Variables de entorno (secretos: claves, tokens, credenciales de túneles)
+.env
+.env.*
+!.env.example
+
+# Editor / SO
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini

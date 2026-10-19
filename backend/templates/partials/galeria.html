@@ -1,0 +1,19 @@
+<section class="section" id="galeria">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="section-label">Momentos</span>
+            <h2 class="section-title">Galería</h2>
+            <p class="section-subtitle">Un vistazo a nuestra cocina y ambiente.</p>
+        </div>
+
+        <div class="gallery">
+            {% for imagen in imagenes_galeria %}
+            <figure class="gallery-item" data-reveal>
+                <img src="{{ imagen.imagen_src }}" alt="{{ imagen.titulo }}" loading="lazy">
+            </figure>
+            {% empty %}
+            <p class="section-subtitle">Aún no hay imágenes en la galería.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>

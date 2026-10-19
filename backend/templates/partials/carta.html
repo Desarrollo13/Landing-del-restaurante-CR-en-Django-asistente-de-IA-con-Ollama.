@@ -1,0 +1,60 @@
+<section class="section section-dark" id="menu">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="section-label">Lo que ofrecemos</span>
+            <h2 class="section-title">Nuestra carta</h2>
+            <p class="section-subtitle">
+                Una selección de nuestros platos, preparados al momento.
+            </p>
+        </div>
+
+        {% if categorias %}
+        <div class="carta-tabs" role="tablist" aria-label="Categorías de la carta" data-reveal>
+            {% for categoria in categorias %}
+            <button type="button"
+                    class="carta-tab{% if forloop.first %} active{% endif %}"
+                    role="tab"
+                    id="tab-{{ categoria.pk }}"
+                    aria-controls="panel-{{ categoria.pk }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    data-tab="panel-{{ categoria.pk }}">
+                {{ categoria.nombre }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <div class="carta-panels">
+            {% for categoria in categorias %}
+            <div class="carta-panel{% if forloop.first %} active{% endif %}"
+                 role="tabpanel"
+                 id="panel-{{ categoria.pk }}"
+                 aria-labelledby="tab-{{ categoria.pk }}">
+                {% if categoria.descripcion %}
+                    <p class="carta-categoria-desc">{{ categoria.descripcion }}</p>
+                {% endif %}
+                <div class="menu-grid">
+                    {% for plato in categoria.platos.all %}
+                    <article class="menu-card">
+                        <div class="menu-img">
+                            {% if plato.imagen_src %}
+                                <img src="{{ plato.imagen_src }}" alt="{{ plato.nombre }}" loading="lazy">
+                            {% endif %}
+                        </div>
+                        <div class="menu-body">
+                            <div class="menu-head">
+                                <h3>{{ plato.nombre }}</h3>
+                                <span class="menu-price">{{ plato.precio }} €</span>
+                            </div>
+                            <p>{{ plato.descripcion }}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p class="section-subtitle">Todavía no hay platos cargados.</p>
+        {% endif %}
+    </div>
+</section>

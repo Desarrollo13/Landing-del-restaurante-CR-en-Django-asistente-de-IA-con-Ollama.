@@ -1,0 +1,27 @@
+<section class="section section-accent" id="testimonios">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <span class="section-label">Opiniones</span>
+            <h2 class="section-title">Lo que dicen de nosotros</h2>
+        </div>
+
+        <div class="testimonials">
+            {% for testimonio in testimonios %}
+            <blockquote class="testimonial" data-reveal>
+                <p>"{{ testimonio.texto }}"</p>
+                <footer>
+                    {% if testimonio.foto_src %}
+                        <img src="{{ testimonio.foto_src }}" alt="{{ testimonio.nombre }}">
+                    {% endif %}
+                    <div>
+                        <strong>{{ testimonio.nombre }}</strong>
+                        {% if testimonio.cargo %}<span>{{ testimonio.cargo }}</span>{% endif %}
+                    </div>
+                </footer>
+            </blockquote>
+            {% empty %}
+            <p class="section-subtitle">Sin testimonios por ahora.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
