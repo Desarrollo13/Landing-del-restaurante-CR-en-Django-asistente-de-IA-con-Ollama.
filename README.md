@@ -257,6 +257,8 @@ En `/admin/` se pueden gestionar:
 - **Galería**: imágenes, orden y visibilidad.
 - **Testimonios**: texto, foto, orden y visibilidad.
 
+El inicio de sesión acepta tanto el **nombre de usuario** como el **correo electrónico**, gracias al backend `restaurant.auth.EmailOrUsernameBackend`.
+
 ## Datos de demostración
 
 ```powershell

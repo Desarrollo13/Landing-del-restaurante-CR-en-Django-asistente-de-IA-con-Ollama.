@@ -17,7 +17,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.admin.forms import AdminAuthenticationForm
 from django.urls import include, path
+
+
+class AdminAuthenticationFormEmail(AdminAuthenticationForm):
+    """Etiqueta el campo del login del admin como 'Usuario o correo'."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].label = "Usuario o correo"
+
+
+admin.site.login_form = AdminAuthenticationFormEmail
 
 urlpatterns = [
     path("admin/", admin.site.urls),
