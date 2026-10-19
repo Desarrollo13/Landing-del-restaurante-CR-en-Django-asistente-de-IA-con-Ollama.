@@ -3,7 +3,7 @@ services:
     name: landing-cr
     runtime: python
     plan: free
-    buildCommand: "./build.sh"
+    buildCommand: "bash build.sh"
     startCommand: "gunicorn --chdir backend restaurant.wsgi:application"
     envVars:
       - key: PYTHON_VERSION
